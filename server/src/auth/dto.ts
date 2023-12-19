@@ -29,4 +29,10 @@ export class GetSessionInfoDto {
 
   @ApiProperty({ example: DEFAULT_DATA.email })
   email: string;
+
+  @ApiProperty()
+  iat: number;
+
+  @ApiProperty()
+  exp: number;
 }
