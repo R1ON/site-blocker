@@ -38,6 +38,8 @@
 
 Генерация клиент, для работы с prisma: `npx prisma generate`
 
+Очистка БД: `npx prisma migrate reset`
+
 Форматирование schema.prisma: `opt + cmd + L`
 
 ### Разное
