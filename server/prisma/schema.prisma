@@ -11,19 +11,45 @@ datasource db {
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  hash    String
-  salt    String
+  id    Int    @id @default(autoincrement())
+  email String @unique
+  hash  String
+  salt  String
 
-  account Account?
+  account   Account?
+  blockList BlockList?
 }
 
 model Account {
-  id                Int     @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  ownerId           Int     @unique
-  owner             User    @relation(fields: [ownerId], references: [id])
+  ownerId Int  @unique
+  owner   User @relation(fields: [ownerId], references: [id])
 
   isBlockingEnabled Boolean
+}
+
+model BlockList {
+  id Int @id @default(autoincrement())
+
+  ownerId Int  @unique
+  owner   User @relation(fields: [ownerId], references: [id])
+
+  items BlockListItem[]
+}
+
+model BlockListItem {
+  id Int @id @default(autoincrement())
+
+  type      BlockItemType
+  data      String
+  createdAt DateTime      @default(now())
+
+  blockListId Int
+  blockList   BlockList @relation(fields: [blockListId], references: [id])
+}
+
+enum BlockItemType {
+  Website
+  KeyWord
 }
