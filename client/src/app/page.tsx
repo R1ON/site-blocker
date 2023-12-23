@@ -1,16 +1,22 @@
-'use client';
+'use client'
 
-import { useEffect } from 'react';
-import { authControllerSignIn } from '@/shared/api/generated/types';
+import { authControllerGetSessionInfo, authControllerSignIn } from '@/shared/api/generated/types';
+import { useQuery } from '@tanstack/react-query';
+
 
 export default function Home() {
-  useEffect(() => {
-    authControllerSignIn({ email: 'test@yandex.ru', password: '1234' }).then(console.log);
-  }, []);
+  // const { data } = useQuery({
+  //   queryKey: ['session'],
+  //   queryFn: () => authControllerGetSessionInfo()
+  // });
+  //
+  // console.log('data', data);
 
   return (
     <main>
       hello world
+      <button type="button">Sign out</button>
+      <button type="button">Sign in</button>
     </main>
   )
 }
